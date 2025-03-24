@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.decrypt = exports.encrypt = exports.DEFAULT_CIPHER = void 0;
+const path_1 = require("path");
+const utils_1 = require("./utils");
+const addon = require("node-gyp-build")((0, path_1.resolve)((0, path_1.join)(__dirname, "..")));
+exports.DEFAULT_CIPHER = "des3";
+const encrypt = (message, publicKey, cipher = exports.DEFAULT_CIPHER, headers) => (0, utils_1.toStringOrBuffer)(message, addon.encrypt((0, utils_1.fromStringOrBuffer)(message), (0, utils_1.fromStringOrBuffer)(publicKey), cipher, headers));
+exports.encrypt = encrypt;
+const decrypt = (message, keyPair) => (0, utils_1.toStringOrBuffer)(message, addon.decrypt((0, utils_1.fromStringOrBuffer)(message), (0, utils_1.fromStringOrBuffer)(keyPair)));
+exports.decrypt = decrypt;
